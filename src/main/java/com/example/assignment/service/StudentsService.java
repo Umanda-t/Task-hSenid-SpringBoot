@@ -29,4 +29,12 @@ public class StudentsService {
     public String getStudentName(Long id) {
         return Repo.findStudentname(id);
     }
+
+    public Students getStudantdata(Long id){
+        return Repo.findStudent(id);
+    }
+
+    public Students get(Long id) {
+        return Repo.findById(id).get();
+    }
 }

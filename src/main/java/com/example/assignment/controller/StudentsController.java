@@ -4,10 +4,13 @@ import com.example.assignment.model.Students;
 import com.example.assignment.repository.StudentsRepository;
 import com.example.assignment.service.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 
 @RestController
@@ -59,7 +62,16 @@ public class StudentsController {
         service.deleteStudent(id);
     }
 
-
+    @PutMapping("/studentupdate/{id}")
+    public ResponseEntity<?> update(@RequestBody Students students, @PathVariable Long id) {
+        try {
+            Students s = service.get(id);
+            service.saveStudent(students);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
 
 }
