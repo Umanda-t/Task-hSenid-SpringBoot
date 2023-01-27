@@ -39,7 +39,7 @@ public class MarksRepositoryTest {
     @Test
     public void testDelete()
     {
-        Long id= Long.valueOf(3);
+        Long id= Long.valueOf(4);
         repo.deleteById(id);
         Optional<Marks> o= repo.findById(id);
         Assertions.assertThat(o).isNotPresent();
