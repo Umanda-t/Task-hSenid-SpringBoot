@@ -24,18 +24,7 @@ public class StudentsController {
         this.repo = repo;
         this.service = service;
     }
-//
-//    @PostMapping("addStudent")
-//    public Students AddStudent(@RequestBody Map<String, Object> payload ){
-//        Students s=new Students();
-//        String name= String.valueOf(payload.get("name"));
-//        String grade= String.valueOf(payload.get("grade"));
-//
-//        s.setName(name);
-//        s.setGrade(grade);
-//
-//       return this.service.saveStudent(s);
-//    }
+
 
     @PostMapping("addStudent")
     public Students AddStudent(@RequestBody Students s ){
@@ -65,7 +54,7 @@ public class StudentsController {
     @PutMapping("/studentupdate/{id}")
     public ResponseEntity<?> update(@RequestBody Students students, @PathVariable Long id) {
         try {
-            Students s = service.get(id);
+            //Students s = service.get(id);
             service.saveStudent(students);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (NoSuchElementException e) {
@@ -73,5 +62,16 @@ public class StudentsController {
         }
     }
 
+//    @PostMapping("addStudent")
+//    public Students AddStudent(@RequestBody Map<String, Object> payload ){
+//        Students s=new Students();
+//        String name= String.valueOf(payload.get("name"));
+//        String grade= String.valueOf(payload.get("grade"));
+//
+//        s.setName(name);
+//        s.setGrade(grade);
+//
+//       return this.service.saveStudent(s);
+//    }
 
 }

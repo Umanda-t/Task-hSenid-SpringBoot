@@ -4,10 +4,13 @@ import com.example.assignment.model.Marks;
 import com.example.assignment.model.Students;
 import com.example.assignment.service.MarksService;
 import com.example.assignment.service.StudentsService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 
 @RestController
@@ -39,5 +42,20 @@ public class MarksController {
 
         return this.service.getStudentMarks(s);
     }
-
+    @PutMapping("/marksupdate/{rid}")
+    public ResponseEntity<?> update(@RequestBody Marks m, @PathVariable Long rid) {
+        try {
+            Marks o = service.get(rid);
+            o.setId(m.getId());
+            o.setMaths(m.getMaths());
+            o.setHistory(m.getHistory());
+            o.setScience(m.getScience());
+            o.setSinhala(m.getSinhala());
+            o.setEngish(m.getEngish());
+            service.saveMarks(o);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

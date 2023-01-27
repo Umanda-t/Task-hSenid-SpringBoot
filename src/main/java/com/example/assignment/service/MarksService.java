@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 
 @Service
@@ -26,5 +27,9 @@ public class MarksService {
     }
     public List<Marks> getStudentMarks(Students id){
         return this.Repo.findMarks(id);
+    }
+
+    public Marks get(Long rid) {
+        return Repo.findById(rid).get();
     }
 }
