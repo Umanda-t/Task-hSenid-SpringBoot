@@ -15,3 +15,36 @@ http://localhost:8080/addMarks
 "science": 40,
 "sinhala": 77
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://localhost:8080/marksupdate/5
+
+
+
+{
+        "rid": 5,
+        "id": {
+            "id": 12,
+            "name": "K.J. Anisha",
+            "grade": "Grade08"
+        },
+        "maths": 67.0,
+        "science": 56.0,
+        "engish": 80.0,
+        "history": 88.0,
+        "sinhala": 81.0
+    }
+
