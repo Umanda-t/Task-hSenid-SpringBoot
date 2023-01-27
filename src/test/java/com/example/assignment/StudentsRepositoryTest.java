@@ -38,7 +38,7 @@ public class StudentsRepositoryTest {
     @Test
     public void testGetID()
     {
-        Long id= Long.valueOf(1);
+        Long id= Long.valueOf(12);
         Optional<Students> o= repo.findById(id);
         Assertions.assertThat(o).isPresent();
 
