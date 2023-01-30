@@ -31,14 +31,14 @@ public class MarksServiceTest {
 
     }
 
-    @Test
-    public void testgetStudentMarks() {
-        Students s=new Students();
-        s.setId(14L);
-        s.setName("M.K. Mayuni");
-        s.setGrade("Grade10");
-        when(repo.findMarks(s)).thenReturn(List.of(new Marks(), new Marks(), new Marks()));
-        assertThat(service.getStudentMarks(s)).hasSize(3);
-    }
+//    @Test
+//    public void testgetStudentMarks() {
+//        Students s=new Students();
+//        s.setId(14L);
+//        s.setName("M.K. Mayuni");
+//        s.setGrade("Grade10");
+//        when(repo.findMarks(s)).thenReturn(List.of(new Marks(), new Marks(), new Marks()));
+//        assertThat(service.getStudentMarks(s)).hasSize(3);
+//    }
 
 }

@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Rollback(false)
+@Rollback(true)
 public class StudentsRepositoryTest {
 
     @Autowired
@@ -25,7 +25,7 @@ public class StudentsRepositoryTest {
     @Test
     public void testAddStudents() {
         Students o= new Students();
-        o.setName("M.K. Mayuni");
+        o.setName("M.J. Mayuni");
         o.setGrade("Grade10");
         Students s=repo.save(o);
 

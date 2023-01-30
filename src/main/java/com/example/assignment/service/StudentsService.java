@@ -9,11 +9,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@Transactional
 public class StudentsService {
 
-    @Autowired
+
     private StudentsRepository Repo;
+
+    public StudentsService(StudentsRepository repo) {
+        Repo = repo;
+    }
+
     public List<Students> getStudentsList() {
 
         return this.Repo.findAll();

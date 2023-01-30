@@ -3,47 +3,48 @@ package com.example.assignment.controller;
 import com.example.assignment.model.Students;
 import com.example.assignment.repository.StudentsRepository;
 import com.example.assignment.service.StudentsService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 
 @RestController
 public class StudentsController {
 
-    private StudentsRepository repo;
+
     private StudentsService service;
 
-    public StudentsController(StudentsRepository repo,
-                              StudentsService service) {
-        this.repo = repo;
+    public StudentsController(StudentsService service) {
+
         this.service = service;
     }
 
 
     @PostMapping("addStudent")
-    public Students AddStudent(@RequestBody Students s ){
+    public ResponseEntity<Students> AddStudent(@RequestBody Students s ){
 
-        return this.service.saveStudent(s);
+        Students o= this.service.saveStudent(s);
+        return ResponseEntity.ok().body(o);
     }
 
 
 
     @GetMapping("allStudents")
-    public List<Students> getAllStudents() {
+    public ResponseEntity<List<Students>> getAllStudents() {
 
-        return this.service.getStudentsList();
+        List<Students> o=service.getStudentsList();
+        return ResponseEntity.ok(o);
     }
 
     @GetMapping("getname/{id}")
-    public String getNameStudents(@PathVariable Long id) {
+    public ResponseEntity<String> getNameStudents(@PathVariable Long id) {
 
-        return this.service.getStudentName(id);
+        String n=service.getStudentName(id);
+        return ResponseEntity.ok(n);
     }
 
     @DeleteMapping("deleteStudent/{id}")
@@ -52,13 +53,13 @@ public class StudentsController {
     }
 
     @PutMapping("/studentupdate/{id}")
-    public ResponseEntity<?> update(@RequestBody Students students, @PathVariable Long id) {
+    public ResponseEntity<String> update(@RequestBody Students students, @PathVariable Long id) {
         try {
             //Students s = service.get(id);
             service.saveStudent(students);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.ok("Success");
         } catch (NoSuchElementException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.ok("Fail");
         }
     }
 

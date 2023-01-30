@@ -24,12 +24,14 @@ public class MarksController {
     }
 
     @PostMapping("addMarks")
-    public Marks AddStudent(@RequestBody Marks m){
-        return this.service.saveMarks(m);
+    public ResponseEntity<Marks> AddStudent(@RequestBody Marks m){
+        Marks o=service.saveMarks(m);
+        return ResponseEntity.ok().body(o);
     }
     @GetMapping("allmarks")
-    public List<Marks> getAllMarks() {
-        return this.service.getMarksList();
+    public ResponseEntity<List<Marks>> getAllMarks() {
+        List<Marks> o=service.getMarksList();
+        return ResponseEntity.ok().body(o);
     }
 
     @DeleteMapping("deletemarks/{rid}")
@@ -37,13 +39,14 @@ public class MarksController {
         service.deletemarks(rid);
     }
     @GetMapping("marks/{id}")
-    public List<Marks> getStudentMarks(@PathVariable Long id) {
-        Students s=studentservice.getStudantdata(id);
+    public ResponseEntity<List<Marks>> getStudentMarks(@PathVariable Long id) {
+      //  Students s=studentservice.getStudantdata(id);
 
-        return this.service.getStudentMarks(s);
+        List<Marks> o=service.getStudentMarks(id);
+        return ResponseEntity.ok().body(o);
     }
     @PutMapping("/marksupdate/{rid}")
-    public ResponseEntity<?> update(@RequestBody Marks m, @PathVariable Long rid) {
+    public ResponseEntity<String> update(@RequestBody Marks m, @PathVariable Long rid) {
         try {
             Marks o = service.get(rid);
             o.setId(m.getId());
@@ -53,9 +56,9 @@ public class MarksController {
             o.setSinhala(m.getSinhala());
             o.setEngish(m.getEngish());
             service.saveMarks(o);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.ok("Success");
         } catch (NoSuchElementException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.ok("Fail");
         }
     }
 }
